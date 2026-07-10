@@ -1,54 +1,116 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dein Event Highlight</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mats Geburtstag</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#111;
+    color:white;
+    text-align:center;
+}
+
+header{
+    background:#ff4081;
+    padding:40px;
+}
+
+h1{
+    font-size:48px;
+}
+
+.info{
+    padding:30px;
+}
+
+.info img{
+    width:180px;
+    border-radius:15px;
+    margin-top:15px;
+}
+
+canvas{
+    background:white;
+    border-radius:10px;
+    margin-top:30px;
+}
+</style>
 </head>
 <body>
 
-    <!-- Header-Bereich ganz oben -->
-    <header class="main-header">
-        <div class="header-container">
-            <!-- Platzhalter für dein oberes Bild -->
-            <img src="oberes-bild.jpg" alt="Event Banner" class="header-img">
-            <h1 class="header-title">Das ultimative Event 2026</h1>
-        </div>
-    </header>
+<header>
+<h1>🎉 Mats feiert am 19. Oktober seinen Geburtstag! 🎉</h1>
+</header>
 
-    <!-- Content-Bereich mit deinem coolen Hintergrundbild -->
-    <main class="content-section">
-        <div class="info-card">
-            <h2>Hintergrund & Details</h2>
-            <p>Hier kommt die Beschreibung deines Events hin. Erzähle deinen Gästen, was sie erwartet, warum sie das auf keinen Fall verpassen dürfen und was das absolute Highlight des Tages wird.</p>
-            
-            <hr>
+<div class="info">
+<h2>Infos</h2>
 
-            <div class="event-data">
-                <div class="data-item">
-                    <strong>📅 Wann:</strong>
-                    <p>Samstag, 15. August 2026<br>Einlass ab 18:00 Uhr</p>
-                </div>
-                
-                <div class="data-item">
-                    <strong>📍 Wo:</strong>
-                    <p>Muster-Location<br>Beispielstraße 42, 12345 Stadt</p>
-                </div>
+<p><b>📅 Datum:</b> 19. Oktober</p>
+<p><b>🎁 Bitte mitbringen:</b> Kondome</p>
 
-                <div class="data-item">
-                    <strong>🎟️ Tickets:</strong>
-                    <p>Eintritt frei (Anmeldung erforderlich)</p>
-                </div>
-            </div>
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Condom.jpg" alt="Kondom">
 
-            <hr>
+<h2>🏓 Ping-Pong-Spiel</h2>
+<p>Der Ball soll dein Gesicht sein.</p>
 
-            <div class="cta-container">
-                <a href="#" class="btn">Jetzt anmelden</a>
-            </div>
-        </div>
-    </main>
+<canvas id="game" width="700" height="400"></canvas>
+</div>
+
+<script>
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
+
+let x=350;
+let y=200;
+let dx=4;
+let dy=3;
+let r=30;
+
+let left=150;
+let right=150;
+
+document.addEventListener("keydown",e=>{
+ if(e.key==="w") left-=20;
+ if(e.key==="s") left+=20;
+ if(e.key==="ArrowUp") right-=20;
+ if(e.key==="ArrowDown") right+=20;
+});
+
+const face=new Image();
+// HIER später dein Bild eintragen:
+face.src="DEIN_BILD.png";
+
+function draw(){
+
+ctx.clearRect(0,0,700,400);
+
+ctx.fillStyle="black";
+ctx.fillRect(10,left,10,100);
+ctx.fillRect(680,right,10,100);
+
+ctx.drawImage(face,x-r,y-r,60,60);
+
+x+=dx;
+y+=dy;
+
+if(y<30||y>370) dy=-dy;
+
+if(x<25&&y>left&&y<left+100) dx=-dx;
+if(x>675&&y>right&&y<right+100) dx=-dx;
+
+if(x<0||x>700){
+x=350;
+y=200;
+}
+requestAnimationFrame(draw);
+}
+
+face.onload=draw;
+</script>
 
 </body>
 </html>
