@@ -1,116 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mats Geburtstag</title>
-
-<style>
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#111;
-    color:white;
-    text-align:center;
-}
-
-header{
-    background:#ff4081;
-    padding:40px;
-}
-
-h1{
-    font-size:48px;
-}
-
-.info{
-    padding:30px;
-}
-
-.info img{
-    width:180px;
-    border-radius:15px;
-    margin-top:15px;
-}
-
-canvas{
-    background:white;
-    border-radius:10px;
-    margin-top:30px;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header>
-<h1>🎉 Mats feiert am 19. Oktober seinen Geburtstag! 🎉</h1>
-</header>
+<h1>🎉 Mats feiert am 19. Oktober seinen Geburtstag!</h1>
 
-<div class="info">
-<h2>Infos</h2>
+<div class="card">
+    <h2>Infos</h2>
 
-<p><b>📅 Datum:</b> 19. Oktober</p>
-<p><b>🎁 Bitte mitbringen:</b> Kondome</p>
+    <p>📅 Datum: 19. Oktober</p>
+    <p>🎁 Mitbringen: Kondome</p>
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Condom.jpg" alt="Kondom">
+    <div style="font-size:70px;">🛡️</div>
 
-<h2>🏓 Ping-Pong-Spiel</h2>
-<p>Der Ball soll dein Gesicht sein.</p>
+    <h2>🏓 Ping-Pong-Spiel</h2>
 
-<canvas id="game" width="700" height="400"></canvas>
+    <canvas id="game" width="700" height="400"></canvas>
 </div>
 
-<script>
-const canvas=document.getElementById("game");
-const ctx=canvas.getContext("2d");
-
-let x=350;
-let y=200;
-let dx=4;
-let dy=3;
-let r=30;
-
-let left=150;
-let right=150;
-
-document.addEventListener("keydown",e=>{
- if(e.key==="w") left-=20;
- if(e.key==="s") left+=20;
- if(e.key==="ArrowUp") right-=20;
- if(e.key==="ArrowDown") right+=20;
-});
-
-const face=new Image();
-// HIER später dein Bild eintragen:
-face.src="DEIN_BILD.png";
-
-function draw(){
-
-ctx.clearRect(0,0,700,400);
-
-ctx.fillStyle="black";
-ctx.fillRect(10,left,10,100);
-ctx.fillRect(680,right,10,100);
-
-ctx.drawImage(face,x-r,y-r,60,60);
-
-x+=dx;
-y+=dy;
-
-if(y<30||y>370) dy=-dy;
-
-if(x<25&&y>left&&y<left+100) dx=-dx;
-if(x>675&&y>right&&y<right+100) dx=-dx;
-
-if(x<0||x>700){
-x=350;
-y=200;
-}
-requestAnimationFrame(draw);
-}
-
-face.onload=draw;
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
